@@ -1,0 +1,5 @@
+Para startar a virtual env
+
+cd C:\Users\Tecnologia 3\Desktop\Pessoal\controle de visitantes
+
+.\env\Scripts\activate
