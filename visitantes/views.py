@@ -6,6 +6,12 @@ def registrar_visitantes(request):
 
     form = VisitantesForm()
 
+    if request.method == "POST":
+        form = VisitantesForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
     context = {
         "nome_pagina": "Registrar Visitantes",
         "form": form
