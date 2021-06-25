@@ -1,8 +1,22 @@
 from django.db import models
 from django.db.models.deletion import PROTECT
+from django.db.models.lookups import StartsWith
 
 # Create your models here.
 class Visitantes(models.Model):
+
+    STATUS_VISITANTE = [
+        ("AGUARDANDO", "Aguardando autorização"),
+        ("EM_VISITA", "Em visita"),
+        ("FINALIZADO", "visita Finalizada")
+        ]
+
+    status = models.CharField(
+        verbose_name="Status",
+        max_length=10,
+        choices=STATUS_VISITANTE,
+        default="AGUARDANDO"
+    )
 
     nome_completo = models.CharField(
         verbose_name="Nome COmpleto",
@@ -60,6 +74,29 @@ class Visitantes(models.Model):
         verbose_name="Porteiro responsavel pelo registro",
         on_delete=PROTECT
     )
+
+    def get_horario_saida(self):
+        if self.horario_saida:
+            return self.horario_saida
+        
+        return "horario de saida não registrado"
+
+    def get_horario_autorização(self):
+        if self.horario_autorizacao:
+            return self.horario_autorizacao
+
+        return "Visitante aguardando autorização"
+
+    def get_morador_responsavel(self):
+        if self.morador_responsavel:
+            return self.morador_responsavel
+        
+        return "Visitante aguardando autorização"
+
+    def get_placa_veiculo(self):
+        if self.placa_veiculo:
+            return self.placa_veiculo
+        return "veiculo não registrado"
 
     class Meta:
         verbose_name = "Visitante"
