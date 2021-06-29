@@ -106,11 +106,9 @@ class Visitantes(models.Model):
             cpf_parte_dois = cpf[3:6]
             cpf_parte_tres = cpf[6:9]
             cpf_parte_quatro = cpf[9:]
-            cpf_formatado = f"{cpf_parte_um}.{cpf_parte_dois}.{cpf_parte_tres}-{cpf_parte_quatro}"
-            
-        return cpf_formatado
 
-        
+            cpf_formatado = f"{cpf_parte_um}.{cpf_parte_dois}.{cpf_parte_tres}-{cpf_parte_quatro}"
+        return cpf_formatado
     class Meta:
         verbose_name = "Visitante"
         verbose_name_plural = "Visitantes"

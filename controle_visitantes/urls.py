@@ -1,11 +1,29 @@
 from django.contrib import admin
 from django.urls import path
 
-from usuarios.views import index
-from visitantes.views import registrar_visitantes, informacoes_visitante
+from django.contrib.auth import views as auth_views
+
+from dashboard.views import index
+from visitantes.views import finalizar_visita, registrar_visitantes, informacoes_visitante
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
+    path(
+        "login/",
+        auth_views.LoginView.as_view(
+            template_name="login.html"
+        ),
+        name="login"
+    ),
+
+    path(
+        "logout/",
+        auth_views.LogoutView.as_view(
+            template_name="logout.html"
+        ),
+        name="logout"
+    ),
 
     path(
         "",
@@ -23,5 +41,11 @@ urlpatterns = [
         "visitantes/<int:id>/",
         informacoes_visitante,
         name="Informacoes Visitantes"
+    ),
+
+    path(
+        "visitantes/<int:id>/finalizar-visita/",
+        finalizar_visita,
+        name="finalizar_visita"
     ),
 ]
